@@ -17,11 +17,11 @@ alloc_class_for_subclass(Class supercls, size_t extraBytes)</code>创建 <strong
 <li>RW_REALIZING:class has started realizing but not yet completed it</li>
 </ul>
 <p>2.调用<code>addNamedClass(cls, cls-&gt;data()-&gt;ro-&gt;name);</code>，添加到<code>NXMapTable *gdb_objc_realized_classes;</code> 中，方便查找</p>
-<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><h5 id="NXHashTable"><a href="#NXHashTable" class="headerlink" title="NXHashTable"></a>NXHashTable</h5><p><img src="/2019/01/16/6003-Runtime动态类/../../images/NXHashTable.png" alt="NXHashTable结构图-来源于网络"></p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><h5 id="NXHashTable"><a href="#NXHashTable" class="headerlink" title="NXHashTable"></a>NXHashTable</h5><p><img src="/2019/01/16/6003-Runtime动态类/NXHashTable.png" alt="NXHashTable结构图-来源于网络"></p>
 <p>注意：<br>在NXHashTable结构中</p>
 <p>prototype的hash函数决定了index的获取规则分为通过指针获取还是字符串获取，NXHashTable中的hash函数的参数一般式指针即(Ptr)<br>count代表存储的HashBucket的数量<br>nbBucket代表bucket容量的大小一般为2^n-1<br>bucket指向存储HashBucket的数组的指针<br>在HashBucket结构中</p>
 <p>count代表该HahsBucket结构存储元素的数量<br>当一个元素时，直接存储到<code>void *one</code>中<br>当多于一个元素时，会存储到二维数组 <code>void **many</code> 中 。</p>
-<h5 id="NXMapTable"><a href="#NXMapTable" class="headerlink" title="NXMapTable"></a>NXMapTable</h5><p><img src="/2019/01/16/6003-Runtime动态类/../../images/NXMapTable.png" alt="NXMapTable结构图-来源于网络"></p>
+<h5 id="NXMapTable"><a href="#NXMapTable" class="headerlink" title="NXMapTable"></a>NXMapTable</h5><p><img src="/2019/01/16/6003-Runtime动态类/NXMapTable.png" alt="NXMapTable结构图-来源于网络"></p>
 <p>注意：<br>在NXMapTable中</p>
 <p>pototype的hash函数决定了index的获取规则分为通过指针获取还是字符串获取，NXMapTable中的hash函数的参数一般式字符串(Str)<br>count代表存储的MapPair的数量<br>nbBucketMinusOne代表bucket容量的大小一般为2^n-1<br>buckets指向存储MapPair的数组的指针<br>在MapPair中</p>
 <p>key一般代表指向str的指针，所以该结构一般用于存储有名称的对象，如selctor，class，protocol等<br>value一般存储与key存储的字符串相关联的结构体.</p>
